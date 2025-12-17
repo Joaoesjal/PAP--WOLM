@@ -1,0 +1,126 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #000; /* fundo preto */
+  color: #fff;      /* letras brancas */
+  line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: #000;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  color: #ffc400; /* dourado discreto no logo */
+  font-size: 24px;
+}
+
+/* Menu alinhado à direita */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.ativo {
+  color: #ffc400;
+}
+
+/* Hero (banner inicial) */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #aaaaaa;
+  margin-bottom: 30px;
+}
+
+/* Botões */
+button, 
+.botao {
+  background: #ffc400;
+  color: #000;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out; /* transição suave */
+  cursor: pointer;
+  box-shadow: 0 0 0px transparent; /* estado normal sem brilho */
+}
+
+button:hover,
+.botao:hover {
+  background: #fff;
+  color: #000;
+  transform: scale(1.15); /* aumenta mais o tamanho */
+  box-shadow: 0 0 35px #ffc400, 0 0 60px rgba(255, 196, 0, 0.5); /* brilho mais intenso */
+}
+
+/* Secções */
+section {
+  padding: 60px 20px;
+  text-align: center;
+  max-width: 1000px;
+  margin: auto;
+}
+
+section h2, section h3 {
+  color: #d4a60e;
+  margin-bottom: 20px;
+}
+
+section p {
+  margin-bottom: 20px;
+}
+
+/* Imagens de pré-visualização */
+.img-preview {
+  max-width: 100%;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+  border-top: 1px solid #222;
+  color: #888;
+  font-size: 14px;
+}

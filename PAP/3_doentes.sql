@@ -1,0 +1,12 @@
+USE pap;
+CREATE TABLE doentes(
+    id INT UNSIGNED NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    data_nascimento DATETIME NOT NULL,
+    num_telefone SMALLINT UNSIGNED NOT NULL,
+    peso DOUBLE(3,2) NOT NULL
+);
+ALTER TABLE doentes
+    ADD CONSTRAINT doentes_pk PRIMARY KEY(id);
+ALTER TABLE doentes CHANGE id
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT;

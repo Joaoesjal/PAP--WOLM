@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacte-nos - WOLM</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>WOLM</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="contactos.html" class="ativo">Contacte-nos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="conteudo">
+      <h2>Contacte-nos</h2>
+      <p>Entra em contacto connosco:</p>
+      <ul>
+        <li>Email: <a href="mailto:info@wolm.pt">info@wolm.pt</a></li>
+        <li>Telefone: +351 912 345 678</li>
+        <li>Morada: Loures, Portugal</li>
+      </ul>
+
+      <form class="form-contacto" action="contactos.php" method="POST">
+        <input type="text" name="nome" placeholder="O teu nome" required>
+        <input type="email" name="email" placeholder="O teu email" required>
+        <textarea name="mensagem" placeholder="Escreve a tua mensagem..." required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 WOLM. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

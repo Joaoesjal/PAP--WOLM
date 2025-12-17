@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS pap;
+
+CREATE DATABASE pap;
+
+USE pap;
