@@ -14,7 +14,8 @@
         <li><a href="index.html">Início</a></li>
         <li><a href="sobre.html">Sobre Nós</a></li>
         <li><a href="contactos.html">Contactos</a></li>
-        <li><a href="wolm1.html" class="ativo">WOLM1</a></li>
+        <li><a href="wolm1.html" class="ativo">Wolm1</a></li>
+        <li><a href="login.php">Entrar</a></li>
       </ul>
     </nav>
   </header>
@@ -41,17 +42,16 @@
       </div>
 
       <div class="wolm1-preview" aria-hidden="true">
-        <!-- SVG simples como placeholder da pulseira -->
         <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração da WOLM1">
           <defs>
             <linearGradient id="g" x1="0" x2="1">
-              <stop offset="0" stop-color="#d4af37"/>
-              <stop offset="1" stop-color="#f7e7a6"/>
+              <stop offset="0" stop-color="#00d4ff"/>
+              <stop offset="1" stop-color="#00a8cc"/>
             </linearGradient>
           </defs>
           <rect x="20" y="55" rx="26" ry="26" width="260" height="50" fill="#0d0d0d" stroke="url(#g)" stroke-width="3"/>
-          <rect x="95" y="40" rx="10" ry="10" width="110" height="80" fill="#0f0f0f" stroke="#d4af37" stroke-width="2"/>
-          <circle cx="150" cy="80" r="8" fill="#d4af37"/>
+          <rect x="95" y="40" rx="10" ry="10" width="110" height="80" fill="#0f0f0f" stroke="#00d4ff" stroke-width="2"/>
+          <circle cx="150" cy="80" r="8" fill="#00d4ff"/>
         </svg>
       </div>
     </section>
@@ -78,7 +78,7 @@
       </div>
 
       <div class="specs">
-        <h4>Especificações (exemplo)</h4>
+        <h4>Especificações técnicas</h4>
         <ul>
           <li>Autonomia: até 48 horas</li>
           <li>Conectividade: Bluetooth + opção de SIM / LTE</li>
@@ -97,8 +97,37 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 WOLM. Todos os direitos reservados.</p>
-  </footer>
+  <div class="footer-container">
+    <!-- Marca e Descrição -->
+    <div class="footer-brand">
+      <h3>WOLM</h3>
+      <p>A sua parceira em inovação e tecnologia para cuidados de saúde inteligentes. Cuidando de quem você ama com tecnologia de ponta.</p>
+    </div>
 
+    <!-- Links Rápidos -->
+    <div class="footer-links">
+      <h4>Links Rápidos</h4>
+      <div class="links-column">
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="wolm1.html">WOLM1</a>
+        <a href="contactos.html">Contactos</a>
+        <a href="login.php">Entrar</a>
+      </div>
+    </div>
+
+    <!-- Informações de Contato -->
+    <div class="footer-contact">
+      <h4>Contacto</h4>
+      <p>info@wolm.pt</p>
+      <p>+351 xxx xxx xxx</p>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-copyright">
+    <p>&copy; 2025 WOLM. Todos os direitos reservados.</p>
+  </div>
+</footer>
 </body>
 </html>
