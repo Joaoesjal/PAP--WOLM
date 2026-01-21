@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION['cuidador_id'])) {
@@ -16,10 +17,24 @@ $stmt = $conn->prepare("
         u.id,
         u.nome,
         u.data_nascimento,
-        p.id_unico_esp32
+        u.peso,
+        u.altura,
+        p.id_unico_esp32,
+        GROUP_CONCAT(
+            CONCAT(m.nome, ' (', m.data_hora, ')')
+            SEPARATOR ' | '
+        ) AS medicamentos
     FROM utentes u
     LEFT JOIN pulseiras p ON u.id_pulseira = p.id
+    LEFT JOIN medicamentos m ON m.id_utente = u.id
     WHERE u.id_cuidador = ?
+    GROUP BY 
+        u.id, 
+        u.nome, 
+        u.data_nascimento,
+        u.peso,
+        u.altura,
+        p.id_unico_esp32
 ");
 $stmt->bind_param("i", $cuidador_id);
 $stmt->execute();
@@ -39,41 +54,66 @@ $utentes = $stmt->get_result();
     <nav>
         <ul>
             <li><a href="painel.php" class="ativo">Painel</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
-    </nav>
 </header>
 
 <main class="painel-container">
     <h2>Bem-vindo, <?php echo htmlspecialchars($cuidador_nome); ?></h2>
 
-    <?php if ($utentes->num_rows > 0): ?>
-        <?php while ($utente = $utentes->fetch_assoc()): ?>
-            <div class="utente-card">
-                <p><strong>Nome Utente:</strong><?php echo htmlspecialchars($utente['nome']); ?></p>
-                <p><strong>Data de nascimento:</strong> <?php echo $utente['data_nascimento']; ?></p>
-
-                <p><strong>Pulseira:</strong>
+<?php if ($utentes->num_rows > 0): ?>
+    <div class="tabela-container">
+    <table class="tabela-utentes">
+        <thead>
+            <tr>
+                <th>Nome do Utente</th>
+                <th>Data de Nascimento</th>
+                <th>Peso (kg)</th>
+                <th>Altura (cm)</th>
+                <th>Medicamentos</th>
+                <th>Pulseira</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($utente = $utentes->fetch_assoc()): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($utente['nome']); ?></td>
+                <td><?php echo htmlspecialchars($utente['data_nascimento']); ?></td>
+                <td><?php echo htmlspecialchars($utente['peso']); ?></td>
+                <td><?php echo htmlspecialchars($utente['altura']); ?></td>
+                <td>
                     <?php
-                    if ($utente['id_unico_esp32']) {
-                        echo "Associada (" . htmlspecialchars($utente['id_unico_esp32']) . ")";
+                    if (!empty($utente['medicamentos'])) {
+                        $lista = explode(' | ', $utente['medicamentos']);
+                        echo '<ul>';
+                        foreach ($lista as $med) {
+                            echo '<li>' . htmlspecialchars($med) . '</li>';
+                        }
+                        echo '</ul>';
                     } else {
-                        echo "Não associada";
+                        echo 'Nenhum medicamento registado';
                     }
                     ?>
-                </p>
+                </td>
+                <td>
+                    <?php
+                    if ($utente['id_unico_esp32']) {
+                        echo 'Associada (' . htmlspecialchars($utente['id_unico_esp32']) . ')';
+                    } else {
+                        echo 'Não associada';
+                    }
+                    ?>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
+<?php
+// secção do código onde está o botão de imprimir PDF
+?>
+<button onclick="window.print()" class="btn-imprimir">Imprimir Relatório</button>
 
-                <a href="medicamentos.php?id=<?php echo $utente['id']; ?>" class="botao">
-                    Ver Medicamentos
-                </a>
-
-                <a href="localizacao.php?id=<?php echo $utente['id']; ?>" class="botao">
-                    Ver Localização
-                </a>
-            </div>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <p>Não existem utentes associados.</p>
+<?php else: ?>
+    <p>Não existem utentes associados.</p>
     <?php endif; ?>
 </main>
 
