@@ -45,13 +45,24 @@
         <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração da WOLM1">
           <defs>
             <linearGradient id="g" x1="0" x2="1">
-              <stop offset="0" stop-color="#00d4ff"/>
-              <stop offset="1" stop-color="#00a8cc"/>
+              <stop offset="0" stop-color="#424242"/>
+              <stop offset="1" stop-color="#212121"/>
+            </linearGradient>
+            <linearGradient id="screenGlow" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#1a1a1a"/>
+              <stop offset="1" stop-color="#2d2d2d"/>
             </linearGradient>
           </defs>
-          <rect x="20" y="55" rx="26" ry="26" width="260" height="50" fill="#0d0d0d" stroke="url(#g)" stroke-width="3"/>
-          <rect x="95" y="40" rx="10" ry="10" width="110" height="80" fill="#0f0f0f" stroke="#00d4ff" stroke-width="2"/>
-          <circle cx="150" cy="80" r="8" fill="#00d4ff"/>
+          <!-- Bracelete -->
+          <rect x="20" y="55" rx="26" ry="26" width="260" height="50" fill="url(#g)" stroke="#1a1a1a" stroke-width="2"/>
+          <!-- Mostrador central -->
+          <rect x="95" y="40" rx="10" ry="10" width="110" height="80" fill="url(#screenGlow)" stroke="#424242" stroke-width="2"/>
+          <!-- LED/Indicador verde -->
+          <circle cx="150" cy="80" r="8" fill="#66bb6a">
+            <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Brilho no LED -->
+          <circle cx="150" cy="80" r="10" fill="#66bb6a" opacity="0.3"/>
         </svg>
       </div>
     </section>
@@ -62,13 +73,8 @@
 
       <div class="features">
         <div class="feature">
-          <h4>Monitorização contínua</h4>
-          <p>Registo de atividade e deteção de padrões que podem indicar desorientação ou risco.</p>
-        </div>
-
-        <div class="feature">
-          <h4>Alerta a cuidadores</h4>
-          <p>Notificações em tempo real para familiares e cuidadores quando necessário.</p>
+          <h4>Acompanhamento contínuo</h4>
+          <p>Acompanhar o utente e ajudar na redução de stress e preocupação do(s) Familiar(es).</p>
         </div>
 
         <div class="feature">
@@ -80,14 +86,12 @@
       <div class="specs">
         <h4>Especificações técnicas</h4>
         <ul>
-          <li>Autonomia: até 48 horas</li>
-          <li>Conectividade: Bluetooth + opção de SIM / LTE</li>
-          <li>Resistência: IP67 (resistente a pó e água)</li>
+          <li>Conectividade: wi-fi</li>
         </ul>
       </div>
 
       <p class="note">
-        Nota: a WOLM1 foi pensada para apoiar cuidadores e famílias — não substitui avaliações médicas profissionais.
+        Nota: a WOLM1 foi pensada para apoiar cuidadores e famílias.
       </p>
 
       <div class="wolm1-ctas-bottom">

@@ -140,7 +140,6 @@ $erro = "Palavra-passe incorreta!";
     <div class="input-box">
       <input type="password" name="password" minlength="6" required />
       <label>Palavra-passe</label>
-      <small class="password-info">Mínimo de 6 caracteres</small>
     </div>
 
     <!-- Entrar botão -->
@@ -172,6 +171,7 @@ $erro = "Palavra-passe incorreta!";
     <div class="input-box">
       <input type="password" name="password" required />
       <label>Palavra-passe</label>
+      <small class="password-info">Mínimo de 6 caracteres</small>
     </div>
 
     <button type="submit" name="registar">Registar</button>
