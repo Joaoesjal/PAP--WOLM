@@ -1,34 +1,63 @@
 <?php
-// Conexão à base de dados
+header('Content-Type: application/json');
+
 $servername = "localhost";
 $username = "root";
 $password = "nova_password";
 $dbname = "pap";
 
-// Cria conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Checa conexão
 if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+    echo json_encode(["status" => "erro", "mensagem" => "Falha na conexão"]);
+    exit;
 }
 
-// Pega os dados do POST (JSON)
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 
-if(isset($data['bracelet_id'])) {
-    $bracelet_id = $data['bracelet_id'];
+if(isset($data['id_unico_esp32'])) {
 
-    // Guarda na tabela "pulseiras"
-    $sql = "INSERT INTO pulseiras (bracelet_id) VALUES ('$bracelet_id')";
-    if ($conn->query($sql) === TRUE) {
-        echo json_encode(["status" => "sucesso", "id" => $bracelet_id]);
+    $id_unico = $data['id_unico_esp32'];
+
+    // Verifica se já existe
+    $check = $conn->prepare("SELECT id FROM pulseiras WHERE id_unico_esp32 = ?");
+    $check->bind_param("s", $id_unico);
+    $check->execute();
+    $check->store_result();
+
+    if($check->num_rows > 0){
+        echo json_encode([
+            "status" => "existe",
+            "mensagem" => "Pulseira já registada"
+        ]);
     } else {
-        echo json_encode(["status" => "erro", "mensagem" => $conn->error]);
+
+        $stmt = $conn->prepare("INSERT INTO pulseiras (id_unico_esp32) VALUES (?)");
+        $stmt->bind_param("s", $id_unico);
+
+        if ($stmt->execute()) {
+            echo json_encode([
+                "status" => "sucesso",
+                "id_unico_esp32" => $id_unico
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "erro",
+                "mensagem" => "Erro ao inserir"
+            ]);
+        }
+
+        $stmt->close();
     }
+
+    $check->close();
+
 } else {
-    echo json_encode(["status" => "erro", "mensagem" => "ID não enviado"]);
+    echo json_encode([
+        "status" => "erro",
+        "mensagem" => "ID não enviado"
+    ]);
 }
 
 $conn->close();

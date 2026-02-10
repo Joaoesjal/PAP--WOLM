@@ -1,7 +1,7 @@
 USE pap;
 CREATE TABLE localizacoes (
     id INT UNSIGNED NOT NULL,
-    id_pulseira INT UNSIGNED NOT NULL,
+    id_unico_esp32 INT UNSIGNED NOT NULL,
     latitude DECIMAL(9,6) NOT NULL,
     longitude DECIMAL(9,6) NOT NULL,
     data_hora DATETIME DEFAULT CURRENT_TIMESTAMP
