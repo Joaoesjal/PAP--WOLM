@@ -6,7 +6,6 @@ CREATE TABLE medicamentos(
     nome VARCHAR(255) NOT NULL,
     dose VARCHAR(255) NOT NULL,
     data_hora DATETIME NOT NULL
-
 );
 
 ALTER TABLE medicamentos

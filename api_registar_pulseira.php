@@ -1,62 +1,34 @@
 <?php
 header('Content-Type: application/json');
 
-$servername = "localhost";
-$username = "root";
-$password = "nova_password";
-$dbname = "pap";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
+$conn = new mysqli("localhost", "root", "nova_password", "pap");
 if ($conn->connect_error) {
     echo json_encode(["status" => "erro", "mensagem" => "Falha na conexão"]);
     exit;
 }
 
-$input = file_get_contents("php://input");
-$data = json_decode($input, true);
+// Busca pulseiras que NÃO estão associadas a nenhum utente
+$sql = "SELECT p.id, p.id_unico_esp32 
+        FROM pulseiras p 
+        LEFT JOIN utentes u ON u.id_pulseira = p.id 
+        WHERE u.id IS NULL 
+        ORDER BY p.id ASC 
+        LIMIT 1";
 
-if(isset($data['id_unico_esp32'])) {
+$result = $conn->query($sql);
 
-    $id_unico = $data['id_unico_esp32'];
-
-    // Verifica se já existe
-    $check = $conn->prepare("SELECT id FROM pulseiras WHERE id_unico_esp32 = ?");
-    $check->bind_param("s", $id_unico);
-    $check->execute();
-    $check->store_result();
-
-    if($check->num_rows > 0){
-        echo json_encode([
-            "status" => "existe",
-            "mensagem" => "Pulseira já registada"
-        ]);
-    } else {
-
-        $stmt = $conn->prepare("INSERT INTO pulseiras (id_unico_esp32) VALUES (?)");
-        $stmt->bind_param("s", $id_unico);
-
-        if ($stmt->execute()) {
-            echo json_encode([
-                "status" => "sucesso",
-                "id_unico_esp32" => $id_unico
-            ]);
-        } else {
-            echo json_encode([
-                "status" => "erro",
-                "mensagem" => "Erro ao inserir"
-            ]);
-        }
-
-        $stmt->close();
-    }
-
-    $check->close();
-
+if ($result && $result->num_rows > 0) {
+    $pulseira = $result->fetch_assoc();
+    
+    echo json_encode([
+        "status" => "sucesso",
+        "pulseira_id" => $pulseira['id'],
+        "id_unico_esp32" => $pulseira['id_unico_esp32']
+    ]);
 } else {
     echo json_encode([
         "status" => "erro",
-        "mensagem" => "ID não enviado"
+        "mensagem" => "Nenhuma pulseira disponível. Registe uma nova pulseira primeiro."
     ]);
 }
 

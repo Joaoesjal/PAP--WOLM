@@ -34,4 +34,3 @@ INSERT INTO localizacoes (id_pulseira, latitude, longitude) VALUES
 
 
 
-

@@ -14,5 +14,5 @@ ALTER TABLE localizacoes
     CHANGE id id INT UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE localizacoes
-    ADD CONSTRAINT pulseiras_fk_id_pulseira
-    FOREIGN KEY (id_pulseira) REFERENCES pulseiras(id);
+    ADD CONSTRAINT pulseiras_fk_id_unico_esp32
+    FOREIGN KEY (id_unico_esp32) REFERENCES pulseiras(id);

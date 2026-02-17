@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main>
     <div class="perfil-container">
-        <h2>✏️ Editar Perfil</h2>
+        <h2>Editar Perfil</h2>
 
         <?php if ($mensagem): ?>
             <div class="perfil-sucesso">
@@ -208,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- SEÇÃO: Foto de Perfil -->
             <div class="secao-form">
-                <h3 class="titulo-secao">📷 Foto de Perfil</h3>
+                <h3 class="titulo-secao">Foto de Perfil</h3>
                 
                 <div class="perfil-avatar-section">
                     <div class="perfil-avatar">
@@ -225,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     
                     <label for="foto" class="custom-file-upload">
-                        📁 Escolher Nova Foto
+                        Escolher Nova Foto
                     </label>
                     <input type="file" name="foto" id="foto" accept="image/*">
                     <small style="display: block; text-align: center; margin-top: 0.5rem; color: #757575;">
@@ -236,10 +236,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- SEÇÃO: Informações Pessoais -->
             <div class="secao-form">
-                <h3 class="titulo-secao">👤 Informações Pessoais</h3>
+                <h3 class="titulo-secao">Informações Pessoais</h3>
                 
                 <div>
-                    <label for="nome">Nome Completo *</label>
+                    <label for="nome">Nome Completo </label>
                     <input type="text" 
                            name="nome" 
                            id="nome" 
@@ -250,7 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div>
-                    <label for="email">Email *</label>
+                    <label for="email">Email </label>
                     <input type="email" 
                            name="email" 
                            id="email" 
@@ -262,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- SEÇÃO: Segurança -->
             <div class="secao-form">
-                <h3 class="titulo-secao">🔒 Alterar Password</h3>
+                <h3 class="titulo-secao">Alterar Password</h3>
                 <p style="color: #757575; font-size: 0.9rem; margin-bottom: 1rem;">
                     Deixe em branco se não quiser alterar a password
                 </p>
@@ -276,12 +276,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                minlength="6"
                                placeholder="Mínimo 6 caracteres">
                         <span class="toggle-password" onclick="togglePassword('password', this)">
-                            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 5C7 5 2.73 8.11 1 12.5C2.73 16.89 7 20 12 20C17 20 21.27 16.89 23 12.5C21.27 8.11 17 5 12 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="12" cy="12.5" r="3.5" stroke="currentColor" stroke-width="2"/>
+                            <!-- OLHO ABERTO (Visível) - Font Awesome Style -->
+                            <svg class="eye-icon" width="22" height="22" viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                <path d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-1.5 0-3 .1-4.5 .2c5.3 10.5 8.5 22.4 8.5 35.1c0 44.2-35.8 80-80 80c-12.7 0-24.6-3.2-35.1-8.5c-.1 1.5-.2 3-.2 4.5c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
                             </svg>
-                            <svg class="eye-slash-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
-                                <path d="M3 3L21 21M12 5C7 5 2.73 8.11 1 12.5C2.73 16.89 7 20 12 20C17 20 21.27 16.89 23 12.5M12 9.5C13.933 9.5 15.5 11.067 15.5 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- OLHO CORTADO (Escondida) - Font Awesome Style - PADRÃO -->
+                            <svg class="eye-slash-icon" width="22" height="22" viewBox="0 0 640 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zm151 118.3C226 97.7 269.5 80 320 80c65.2 0 118.8 29.6 159.9 67.7C518.4 183.5 545 226 558.6 256c-12.6 28-36.6 66.8-70.9 100.9l-53.8-42.2c9.1-17.6 14.2-37.5 14.2-58.7c0-70.7-57.3-128-128-128c-32.2 0-61.7 11.9-84.2 31.5l-46.1-36.1zM394.9 284.2l-81.5-63.9c4.2-8.5 6.6-18.2 6.6-28.3c0-5.5-.7-10.9-2-16c.7 0 1.3 0 2 0c44.2 0 80 35.8 80 80c0 9.9-1.8 19.4-5.1 28.2zm51.3 163.3l-41.9-33C378.8 425.4 350.7 432 320 432c-65.2 0-118.8-29.6-159.9-67.7C121.6 328.5 95 286 81.4 256c8.3-18.4 21.5-41.5 39.4-64.8L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5zm-88-69.3L302 334c-23.5-5.4-43.1-21.2-53.7-42.3l-56.1-44.2c-.2 2.8-.3 5.6-.3 8.5c0 70.7 57.3 128 128 128c13.3 0 26.1-2 38.2-5.8z"/>
                             </svg>
                         </span>
                     </div>
@@ -295,12 +296,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                id="password_confirm"
                                placeholder="Digite a password novamente">
                         <span class="toggle-password" onclick="togglePassword('password_confirm', this)">
-                            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 5C7 5 2.73 8.11 1 12.5C2.73 16.89 7 20 12 20C17 20 21.27 16.89 23 12.5C21.27 8.11 17 5 12 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="12" cy="12.5" r="3.5" stroke="currentColor" stroke-width="2"/>
+                            <!-- OLHO ABERTO (Visível) - Font Awesome Style -->
+                            <svg class="eye-icon" width="22" height="22" viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                <path d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-1.5 0-3 .1-4.5 .2c5.3 10.5 8.5 22.4 8.5 35.1c0 44.2-35.8 80-80 80c-12.7 0-24.6-3.2-35.1-8.5c-.1 1.5-.2 3-.2 4.5c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
                             </svg>
-                            <svg class="eye-slash-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
-                                <path d="M3 3L21 21M12 5C7 5 2.73 8.11 1 12.5C2.73 16.89 7 20 12 20C17 20 21.27 16.89 23 12.5M12 9.5C13.933 9.5 15.5 11.067 15.5 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- OLHO CORTADO (Escondida) - Font Awesome Style - PADRÃO -->
+                            <svg class="eye-slash-icon" width="22" height="22" viewBox="0 0 640 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zm151 118.3C226 97.7 269.5 80 320 80c65.2 0 118.8 29.6 159.9 67.7C518.4 183.5 545 226 558.6 256c-12.6 28-36.6 66.8-70.9 100.9l-53.8-42.2c9.1-17.6 14.2-37.5 14.2-58.7c0-70.7-57.3-128-128-128c-32.2 0-61.7 11.9-84.2 31.5l-46.1-36.1zM394.9 284.2l-81.5-63.9c4.2-8.5 6.6-18.2 6.6-28.3c0-5.5-.7-10.9-2-16c.7 0 1.3 0 2 0c44.2 0 80 35.8 80 80c0 9.9-1.8 19.4-5.1 28.2zm51.3 163.3l-41.9-33C378.8 425.4 350.7 432 320 432c-65.2 0-118.8-29.6-159.9-67.7C121.6 328.5 95 286 81.4 256c8.3-18.4 21.5-41.5 39.4-64.8L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5zm-88-69.3L302 334c-23.5-5.4-43.1-21.2-53.7-42.3l-56.1-44.2c-.2 2.8-.3 5.6-.3 8.5c0 70.7 57.3 128 128 128c13.3 0 26.1-2 38.2-5.8z"/>
                             </svg>
                         </span>
                     </div>
@@ -309,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <button type="submit" class="botao btn-large">
-                💾 Guardar Alterações
+                Guardar Alterações
             </button>
         </form>
     </div>
@@ -358,13 +360,15 @@ function togglePassword(inputId, toggleBtn) {
     const eyeSlashIcon = toggleBtn.querySelector('.eye-slash-icon');
     
     if (input.type === 'password') {
+        // Mudar para VISÍVEL
         input.type = 'text';
-        eyeIcon.style.display = 'none';
-        eyeSlashIcon.style.display = 'block';
+        eyeIcon.style.display = 'block';        // Mostrar olho ABERTO
+        eyeSlashIcon.style.display = 'none';    // Esconder olho CORTADO
     } else {
+        // Mudar para ESCONDIDA
         input.type = 'password';
-        eyeIcon.style.display = 'block';
-        eyeSlashIcon.style.display = 'none';
+        eyeIcon.style.display = 'none';         // Esconder olho ABERTO
+        eyeSlashIcon.style.display = 'block';   // Mostrar olho CORTADO
     }
 }
 
