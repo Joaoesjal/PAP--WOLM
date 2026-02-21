@@ -2,34 +2,36 @@
 header('Content-Type: application/json');
 
 $conn = new mysqli("localhost", "root", "nova_password", "pap");
+
 if ($conn->connect_error) {
-    echo json_encode(["status" => "erro", "mensagem" => "Falha na conexão"]);
+    echo json_encode(["status" => "erro", "mensagem" => "Erro na ligação"]);
     exit;
 }
 
-// Busca pulseiras que NÃO estão associadas a nenhum utente
-$sql = "SELECT p.id, p.id_unico_esp32 
-        FROM pulseiras p 
-        LEFT JOIN utentes u ON u.id_pulseira = p.id 
-        WHERE u.id IS NULL 
-        ORDER BY p.id ASC 
-        LIMIT 1";
+// Ler JSON enviado pelo ESP32
+$data = json_decode(file_get_contents("php://input"), true);
 
-$result = $conn->query($sql);
+if (!isset($data['id_unico_esp32'])) {
+    echo json_encode(["status" => "erro", "mensagem" => "ID não recebido"]);
+    exit;
+}
 
-if ($result && $result->num_rows > 0) {
-    $pulseira = $result->fetch_assoc();
-    
-    echo json_encode([
-        "status" => "sucesso",
-        "pulseira_id" => $pulseira['id'],
-        "id_unico_esp32" => $pulseira['id_unico_esp32']
-    ]);
+$id_unico = $conn->real_escape_string($data['id_unico_esp32']);
+
+// Verificar se já existe
+$verifica = $conn->query("SELECT id FROM pulseiras WHERE id_unico_esp32 = '$id_unico'");
+
+if ($verifica->num_rows > 0) {
+    echo json_encode(["status" => "sucesso", "mensagem" => "Pulseira já registada"]);
 } else {
-    echo json_encode([
-        "status" => "erro",
-        "mensagem" => "Nenhuma pulseira disponível. Registe uma nova pulseira primeiro."
-    ]);
+
+    $sql = "INSERT INTO pulseiras (id_unico_esp32) VALUES ('$id_unico')";
+
+    if ($conn->query($sql)) {
+        echo json_encode(["status" => "sucesso", "mensagem" => "Pulseira registada com sucesso"]);
+    } else {
+        echo json_encode(["status" => "erro", "mensagem" => "Erro ao inserir"]);
+    }
 }
 
 $conn->close();

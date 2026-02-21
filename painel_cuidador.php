@@ -385,47 +385,68 @@ $utentes = obterUtentes($conn, $cuidador_id);
 </footer>
 
 <script>
+// Função para associar pulseira MANUALMENTE
 async function associarPulseira(idUtente) {
-
-    if (!confirm("Associar uma pulseira disponível a este utente?")) {
+    
+    // Pedir ao cuidador para escrever o ID da pulseira
+    const idPulseira = prompt(
+        "📝 Digite o ID da pulseira\n\n" +
+        "O ID está escrito num papel na pulseira.\n" +
+        "Exemplo: AA:BB:CC:DD:EE:FF"
+    );
+    
+    // Se cancelou ou não escreveu nada
+    if (!idPulseira || idPulseira.trim() === '') {
         return;
     }
-
+    
+    // Limpar espaços e converter para maiúsculas
+    const idLimpo = idPulseira.trim().toUpperCase();
+    
+    // Validar formato básico do MAC address
+    const formatoMAC = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
+    
+    if (!formatoMAC.test(idLimpo)) {
+        alert(
+            "❌ Formato inválido!\n\n" +
+            "O ID deve estar no formato:\n" +
+            "AA:BB:CC:DD:EE:FF\n\n" +
+            "Exemplo: 48:3F:DA:12:34:56"
+        );
+        return;
+    }
+    
+    // Confirmar associação
+    if (!confirm('Confirma associar a pulseira ' + idLimpo + '?')) {
+        return;
+    }
+    
     try {
-
-        // Pedir pulseira livre ao servidor
-        let respPulseira = await fetch("obter_pulseira_livre.php");
-        let dadosPulseira = await respPulseira.json();
-
-        if (dadosPulseira.status !== "sucesso") {
-            alert(dadosPulseira.mensagem || "Nenhuma pulseira disponível.");
-            return;
-        }
-
-        // Associar ao utente
-        let respAssoc = await fetch("associar_pulseira.php", {
+        // Enviar para o servidor
+        const resposta = await fetch("associar_pulseira_manual.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 utente_id: idUtente,
-                pulseira_id: dadosPulseira.pulseira_id
+                id_pulseira: idLimpo
             })
         });
-
-        let dadosAssoc = await respAssoc.json();
-
-        alert(dadosAssoc.mensagem);
-
-        if (dadosAssoc.status === "sucesso") {
-            location.reload(); // atualiza a tabela
+        
+        const dados = await resposta.json();
+        
+        // Mostrar resultado
+        if (dados.status === "sucesso") {
+            alert("✅ " + dados.mensagem);
+            location.reload(); // Atualizar a página
+        } else {
+            alert("❌ " + dados.mensagem);
         }
-
+        
     } catch (erro) {
-        alert("Erro ao associar pulseira.");
+        alert("❌ Erro ao associar pulseira. Tente novamente.");
         console.error(erro);
     }
 }
 </script>
-
 </body>
 </html>
